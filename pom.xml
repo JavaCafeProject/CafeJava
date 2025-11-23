@@ -6,13 +6,13 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.5.7</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <groupId>com.example</groupId>
-    <artifactId>Bil372</artifactId>
+        <relativePath/> </parent>
+
+    <groupId>com.cafejava</groupId>
+    <artifactId>CafeJava</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Bil372</name>
-    <description>Bil372</description>
+    <name>CafeJava</name>
+    <description>CafeJava Spring Boot Application</description>
     <url/>
     <licenses>
         <license/>
@@ -99,5 +99,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

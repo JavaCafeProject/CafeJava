@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/menu")
 public class MenuController {
-
+      /*
     private IMenuService menuService;
 
     @GetMapping("/categories")
@@ -31,5 +31,5 @@ public class MenuController {
     @GetMapping("/categories/{category_id}/item/{item_id}")
     public ItemResponse getItemById (@PathVariable Long category_id, @PathVariable Long item_id) {
         return menuService.getItemById(category_id, item_id);
-    }
+    }  */
 }

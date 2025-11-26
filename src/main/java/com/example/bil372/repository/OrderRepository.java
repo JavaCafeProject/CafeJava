@@ -12,9 +12,30 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
+
+    @Query(value = """
+            SELECT o FROM Order o
+            JOIN FETCH o.customer c
+            JOIN FETCH o.employee e
+            JOIN FETCH o.orderItems oi
+            JOIN FETCH oi.item i
+            WHERE o.id = :id
+    """)
+    Optional<Order> findByIdWithDetails(@Param("id") Long id);
+
+    @Query(value = """
+            SELECT o 
+            FROM Order o 
+            JOIN FETCH o.customer c 
+            JOIN FETCH o.employee e 
+            JOIN FETCH o.orderItems oi 
+            JOIN FETCH oi.item i
+    """)
+    List<Order> findAllWithDetails();
 
 
     @Query(value = """

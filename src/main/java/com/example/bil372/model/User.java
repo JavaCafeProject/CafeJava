@@ -14,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,12 +47,12 @@ public abstract class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return email;
     }
 
     @Override

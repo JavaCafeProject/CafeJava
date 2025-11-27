@@ -1,12 +1,17 @@
 package com.example.bil372.dto.response;
 
 import com.example.bil372.model.Customer;
+import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-
+@Data
+@Builder
 public class ReviewResponse {
-    private Customer customer;
-    private ItemResponse item;
-    private String description;
-    private LocalDateTime reviewDate;
+            Long id;
+            Long customerId;
+            Long itemId;
+            String description;
+            LocalDateTime reviewDate;
+
 }

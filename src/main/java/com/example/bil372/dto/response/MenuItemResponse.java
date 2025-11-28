@@ -2,9 +2,11 @@ package com.example.bil372.dto.response;
 
 
 import lombok.Builder;
+import lombok.Data;
 
 import java.math.BigDecimal;
 @Builder
+@Data
 public class MenuItemResponse {
     private Long id;
     private String name;

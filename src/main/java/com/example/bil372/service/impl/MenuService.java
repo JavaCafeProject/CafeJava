@@ -35,7 +35,7 @@ public class MenuService implements IMenuService {
         return MenuCategoryResponse.builder()
                 .id(category.getId())
                 .name(category.getName())
-                .itemCount(category.getItems() != null ? category.getItems().size() : 0) // Tekrar ekleyin
+                .itemCount(category.getItems() != null ? category.getItems().size() : 0)
                 .build();
     }
 
@@ -64,7 +64,7 @@ public class MenuService implements IMenuService {
                 .price(request.getPrice())
                 .description(request.getDescription())
                 .imageUrl(request.getImageUrl())
-                .category(category) // İlişkisel alanı ata
+                .category(category)
                 .build();
 
         Item savedItem = itemRepository.save(newItem);

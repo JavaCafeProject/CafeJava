@@ -32,10 +32,17 @@ public class MenuService implements IMenuService {
                 .build();
     }
     private MenuCategoryResponse menuCategoryResponseCreator(Category category) {
+        List<MenuItemResponse> itemResponseList =
+                category.getItems() != null ?
+                        category.getItems().stream()
+                                .map(this::menuItemResponseCreator)
+                                .collect(Collectors.toList())
+                        : List.of();
         return MenuCategoryResponse.builder()
                 .id(category.getId())
                 .name(category.getName())
                 .itemCount(category.getItems() != null ? category.getItems().size() : 0)
+                .items(itemResponseList)
                 .build();
     }
 

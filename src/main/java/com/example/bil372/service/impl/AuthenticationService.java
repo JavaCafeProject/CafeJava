@@ -3,6 +3,7 @@ package com.example.bil372.service.impl;
 import com.example.bil372.dto.request.LoginRequest;
 import com.example.bil372.dto.request.RegisterRequest;
 import com.example.bil372.dto.response.AuthenticationResponse;
+import com.example.bil372.dto.response.UserResponse;
 import com.example.bil372.model.Customer;
 import com.example.bil372.model.ROLE;
 import com.example.bil372.model.User;
@@ -92,8 +93,18 @@ public class AuthenticationService implements IAuthenticationService {
     }
 
     @Override
-    public User getProfile(UserDetails userDetails) {
-        return userRepository.findByEmail(userDetails.getUsername())
+    public UserResponse getProfile(UserDetails userDetails) {
+        User user = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        UserResponse response = UserResponse.builder()
+                .id(user.getId().longValue())
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .role(user.getRole())
+                .build();
+
+        return response;
     }
 }

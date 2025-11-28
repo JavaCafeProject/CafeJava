@@ -20,19 +20,14 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**",
-                                "/menu/**",
-                                "/order/**",
-                                "/review/**",
-                                "/report/**",
+                        .requestMatchers("/auth/sign_in",
+                                "/auth/sign_up",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"
                         ).permitAll()

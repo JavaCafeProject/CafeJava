@@ -3,8 +3,10 @@ package com.example.bil372.controller;
 import com.example.bil372.dto.request.LoginRequest;
 import com.example.bil372.dto.request.RegisterRequest;
 import com.example.bil372.dto.response.AuthenticationResponse;
+import com.example.bil372.dto.response.UserResponse;
 import com.example.bil372.model.User;
 import com.example.bil372.service.IAuthenticationService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,7 +32,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/profile")
-    public User getProfile(@AuthenticationPrincipal UserDetails userDetails) {
+    public UserResponse getProfile(@AuthenticationPrincipal UserDetails userDetails) {
         return authenticationService.getProfile(userDetails);
     }
 

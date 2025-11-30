@@ -1,6 +1,7 @@
 package com.example.bil372.service.impl;
 
 import com.example.bil372.dto.request.ReviewRequest;
+import com.example.bil372.dto.response.ItemResponse;
 import com.example.bil372.dto.response.ReviewResponse;
 import com.example.bil372.model.Customer;
 import com.example.bil372.model.Item;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -58,16 +61,33 @@ public class ReviewService implements IReviewService {
 
 
     @Override
-    public ReviewResponse getReviewById(Long id) {
-        Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Review not found"));
+    public ItemResponse getReviewById(Long id) {
 
-        return ReviewResponse.builder()
-                .id(review.getId())
-                .description(review.getDescription())
-                .itemId(review.getItem().getId())
-                .customerId(review.getCustomer().getId())
-                .reviewDate(review.getReviewDate())
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item not found"));
+
+
+        List<ReviewResponse> reviewResponses = new ArrayList<>();
+
+        for (Review review : item.getReviews()) {
+            ReviewResponse response = ReviewResponse.builder()
+                    .id(review.getId())
+                    .customerId(review.getCustomer().getId())
+                    .itemId(review.getItem().getId())
+                    .description(review.getDescription())
+                    .reviewDate(review.getReviewDate())
+                    .build();
+
+            reviewResponses.add(response);
+        }
+
+
+        return ItemResponse.builder()
+                .name(item.getName())
+                .description(item.getDescription())
+                .price(item.getPrice())
+                .imageUrl(item.getImageUrl())
+                .reviews(reviewResponses)
                 .build();
 
     }

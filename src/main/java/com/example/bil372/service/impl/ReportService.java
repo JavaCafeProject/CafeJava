@@ -26,15 +26,11 @@ public class ReportService implements IReportService {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
+
     @Override
     public DailySalesReport getDailySalesReport() {
-        Object[] row = orderRepository.getDailySales();
-
-        return new DailySalesReport(
-                (LocalDate) row[0],
-                ((Number) row[1]).intValue(),
-                (BigDecimal) row[2]
-        );
+        DailySalesReport report = orderRepository.getDailySales();
+        return report;
     }
 
 
@@ -74,10 +70,12 @@ public class ReportService implements IReportService {
 
     @Override
     public RevenueReport getRevenueReport() {
-        Object[] row = orderRepository.getRevenue();
+        RevenueReport row = orderRepository.getRevenue();
         return new RevenueReport(
-                (BigDecimal) row[0],
-                (BigDecimal) row[1]
+                row.getTotalRevenueAllTime(),
+                row.getTotalRevenueToday()
         );
     }
+
+
 }

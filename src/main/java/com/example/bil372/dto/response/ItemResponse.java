@@ -6,10 +6,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.Builder;
+import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Data
+@Builder
 public class ItemResponse {
     private String name;
     private BigDecimal price;

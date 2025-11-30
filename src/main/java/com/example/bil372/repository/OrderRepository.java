@@ -40,13 +40,14 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query(value = """
     SELECT 
-        CURDATE(),
-        COUNT(*),
-        COALESCE(SUM(o.total_price), 0)
+        CURDATE() AS date,
+        COUNT(*) AS totalOrders,
+        COALESCE(SUM(o.total_price), 0) AS revenue
     FROM orders o
-    WHERE o.order_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 1 DAY)
-    """, nativeQuery = true)
-    Object[] getDailySales();
+    WHERE o.order_date >= CURDATE() AND o.order_date < DATE_ADD(CURDATE(), INTERVAL 1 DAY)
+""", nativeQuery = true)
+    DailySalesReport getDailySales();
+
 
 
 
@@ -63,13 +64,14 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
 
 
-    @Query("""
-        SELECT 
-            COALESCE(SUM(o.totalPrice), 0),
-            COALESCE(SUM(CASE WHEN FUNCTION('DATE', o.orderDate) = CURRENT_DATE THEN o.totalPrice ELSE 0 END), 0)
-        FROM Order o
-    """)
-    Object[] getRevenue();
+    @Query(value = """
+    SELECT 
+        COALESCE(SUM(o.total_price), 0) AS totalRevenueAllTime,
+        COALESCE(SUM(CASE WHEN DATE(o.order_date) = CURDATE() THEN o.total_price ELSE 0 END), 0) AS totalRevenueToday
+    FROM orders o
+""", nativeQuery = true)
+    RevenueReport getRevenue();
+
 
 
 

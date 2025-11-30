@@ -1,6 +1,7 @@
 package com.example.bil372.controller;
 
 import com.example.bil372.dto.request.ReviewRequest;
+import com.example.bil372.dto.response.ItemResponse;
 import com.example.bil372.dto.response.ReviewResponse;
 import com.example.bil372.model.Review;
 import com.example.bil372.service.IReviewService;
@@ -22,7 +23,7 @@ public class ReviewController {
     }
 
     @GetMapping("/item/{id}")
-    public ReviewResponse getReviewById(@PathVariable Long id){
+    public ItemResponse getReviewById(@PathVariable Long id){
         return reviewService.getReviewById(id);
     }
 }

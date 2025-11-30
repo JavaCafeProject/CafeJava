@@ -43,7 +43,7 @@ public class ReportService implements IReportService {
             TopProductReport topProductReport = new TopProductReport(
                     ((Number) row[0]).longValue(),
                     (String) row[1],
-                    ((Number) row[2]).intValue()
+                    ((Number) row[2]).longValue()
             );
             topProductReports.add(topProductReport);
         }
@@ -60,7 +60,7 @@ public class ReportService implements IReportService {
                     ((Number) row[0]).longValue(),
                     (String) row[1],
                     (String) row[2],
-                    ((Number) row[3]).intValue(),
+                    ((Number) row[3]).longValue(),
                     (BigDecimal) row[4]
             );
             employeePerformanceReports.add(employeePerformanceReport);

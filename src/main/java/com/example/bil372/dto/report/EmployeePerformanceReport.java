@@ -13,6 +13,6 @@ public class EmployeePerformanceReport {
     private Long employeeId;
     private String firstName;
     private String lastName;
-    private int totalOrders;
+    private Long totalOrders;
     private BigDecimal totalRevenue;
 }

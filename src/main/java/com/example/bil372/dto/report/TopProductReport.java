@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class TopProductReport {
     private Long itemId;
     private String itemName;
-    private int totalQuantitySold;
+    private Long totalQuantitySold;
 }

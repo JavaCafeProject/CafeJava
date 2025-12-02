@@ -129,6 +129,21 @@ public class OrderService implements IOrderService {
         return orderResponseCreator(order);
     }
 
+    @Override
+    public List<OrderResponse> getMyOrders(Long id) {
+        List<Order> orders = orderRepository.findAllByCustomerId(id);
+
+        if (orders.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<OrderResponse> orderResponseList = new ArrayList<>();
+        for (Order order : orders) {
+            orderResponseList.add(orderResponseCreator(order));
+        }
+
+        return orderResponseList;
+    }
 
     private OrderResponse orderResponseCreator(Order order){
         List<OrderItemResponse> orderItemResponseList = new ArrayList<>();

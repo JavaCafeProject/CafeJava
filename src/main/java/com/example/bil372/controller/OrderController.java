@@ -31,4 +31,7 @@ public class OrderController {
     @PutMapping("/{id}")
     public OrderResponse cancelOrder(@PathVariable Long id){return orderService.cancelOrder(id);}
 
+    @GetMapping("/customer/{id}")
+    public List<OrderResponse> getMyOrders(@PathVariable Long id){return orderService.getMyOrders(id);}
+
 }

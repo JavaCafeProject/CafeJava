@@ -12,7 +12,6 @@ import com.example.bil372.repository.EmployeeRepository;
 import com.example.bil372.repository.UserRepository;
 import com.example.bil372.service.IAuthenticationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,13 +25,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService implements IAuthenticationService {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public AuthenticationResponse signIn(LoginRequest request) {
@@ -55,11 +53,24 @@ public class AuthenticationService implements IAuthenticationService {
         // JWT token oluştur - User objesi ile (kullanıcı bilgileri otomatik eklenecek)
         var jwtToken = jwtService.generateToken(user);
 
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .userId(user.getId().longValue())
-                .role(user.getRole())
-                .build();
+        if(user.getRole() == ROLE.CUSTOMER){
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .userId(user.getId().longValue())
+                    .role(user.getRole())
+                    .employeeRole(null)
+                    .firstName(user.getFirstName())
+                    .build();
+        }else{
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .userId(user.getId().longValue())
+                    .role(user.getRole())
+                    .employeeRole(employeeRepository.findById(user.getId()).get().getEmployeeRole())
+                    .firstName(user.getFirstName())
+                    .build();
+        }
+
     }
 
     @Override
@@ -89,6 +100,8 @@ public class AuthenticationService implements IAuthenticationService {
                 .token(jwtToken)
                 .userId(customer.getId().longValue())
                 .role(ROLE.CUSTOMER)
+                .employeeRole(null)
+                .firstName(customer.getFirstName())
                 .build();
     }
 

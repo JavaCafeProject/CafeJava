@@ -1,0 +1,63 @@
+.category-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 30px 20px;
+  box-shadow: 0 4px 10px rgba(75, 54, 33, 0.05); 
+  border: 1px solid #efebe9;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(75, 54, 33, 0.15);
+  border-color: #d7ccc8;
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, #6f4e37, #a1887f);
+}
+
+.category-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  background-color: #fdfbf7;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.category-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #4b3621;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.5px;
+}
+
+.category-count-badge {
+  font-size: 0.9rem;
+  color: #8d6e63;
+  background-color: #efebe9;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-weight: 600;
+}

@@ -1,0 +1,40 @@
+.order-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  gap: 25px; 
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.no-orders-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 2px dashed #d7ccc8; 
+  text-align: center;
+  color: #8d6e63;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+  margin-top: 20px;
+}
+
+.no-orders-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.no-orders-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #5d4037;
+}
+
+.no-orders-subtext {
+  font-size: 0.95rem;
+  color: #a1887f;
+}
